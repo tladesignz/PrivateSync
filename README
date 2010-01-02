@@ -1,0 +1,12 @@
+PrivateSync is a Palm webOS application which
+creates a Synergy account and populates this with
+contacts and calendar data provided in a JSON file
+on a web service (which could be on a LAN).
+
+It's currently in a protoype state and not fully functional.
+
+This software is released under the terms of the GNU GPL v3 license.
+
+http://www.gnu.org/licenses/gpl.html
+
+(c) Benjamin Erhart berhart@tladesignz.com

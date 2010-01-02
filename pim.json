@@ -1,0 +1,11 @@
+{
+    "key": "value",
+    "contacts": [
+        {
+            "firstName": "Michael",
+            "lastName": "Mustermann",
+            "companyName": "Musterfirma",
+            "nickname": "Musti"
+        }
+    ]
+}

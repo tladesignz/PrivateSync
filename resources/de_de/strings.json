@@ -1,0 +1,10 @@
+{
+    "Refresh Now": "Daten holen",
+    "The account could not be created for an unknown reason. Sorry!": "Das Konto konnte leider aus einem unbekannten Grund nicht erstellt werden.",
+    "The account calendar could not be created for an unknown reason. Sorry!": "Der Kontokalender konnte leider aus einem unbekannten Grund nicht erstellt werden.",
+    "Account Created": "Konto erstellt",
+    "Your PrivateSync account was created successfully!": "Ihr PrivateSync Konto wurde erfolgreich erstellt.",
+    "OK": "OK",
+    "Server communication error. Please check your settings and server setup!": "Serverkommunikationsfehler. Bitte überprüfen Sie Ihre Einstellungen und die des Servers!",
+    "Did not retrieve JSON data. Make sure, the PIM file provided contains only valid JSON encoded data!": "Keine gültigen JSON Daten empfangen. Bitte überprüfen Sie die PIM Datei auf Validität!",
+}
