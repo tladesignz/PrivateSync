@@ -1,5 +1,5 @@
 /*jslint white: false, onevar: false, plusplus: false */
-/*global $L Mojo Ajax */
+/*global $L Mojo Ajax Base64 */
 function FirstAssistant() {
     /* this is the creator function for your scene assistant object. It will be passed all the
        additional parameters (after the scene name) that were passed to pushScene. The reference
@@ -41,28 +41,46 @@ FirstAssistant.prototype.setup = function() {
                 value: 'http://yourserver/pim.json',
                 disabled: false
             }
+        },
+        username: {
+            attributes: {
+                hintText: null,
+                multiline: false,
+                enterSubmits: false,
+                focus: false
+            },
+            model: {
+                value: '',
+                disabled: false
+            }
+        },
+        password: {
+            attributes: {
+                hintText: null,
+                multiline: false,
+                enterSubmits: false,
+                focus: false
+            },
+            model: {
+                value: '',
+                disabled: false
+            }
         }
     };
 
-    var cookie = new Mojo.Model.Cookie( 'profile' );
-    var profile = cookie.get();
+    var settings = new Mojo.Model.Cookie( 'settings' ).get();
 
-    if (typeof profile === 'undefined') {
+    if (typeof settings === 'undefined') {
         this.createProfile();
-    }
-
-    cookie = new Mojo.Model.Cookie( 'pim_file' );
-
-    if (typeof cookie.get() === 'undefined') {
-        cookie.put( this.widgets.pim_file.model.value );
-    }
-    else {
-        this.widgets.pim_file.model.value = cookie.get();
     }
 
     for (var b in this.widgets) {
         if (this.widgets.hasOwnProperty( b )) {
             Mojo.Log.info( '%j', b );
+
+            if (settings && settings[ b ]) {
+                this.widgets[ b ].model.value = settings[ b ];
+            }
 
             // set up widgets
             this.controller.setupWidget( b, this.widgets[ b ].attributes, this.widgets[ b ].model );
@@ -129,8 +147,8 @@ FirstAssistant.prototype.profileCreated = function( response ) {
     Mojo.Log.info( 'Account creation succeeded' );
     Mojo.Log.info( '%j', response );
 
-    var cookie = new Mojo.Model.Cookie( 'profile' );
-    cookie.put( response );
+    var cookie = new Mojo.Model.Cookie( 'settings' );
+    cookie.put( {profile: response} );
 
     this.controller.serviceRequest( 'palm://com.palm.calendar/crud', {
         method: 'createCalendar',
@@ -162,13 +180,22 @@ FirstAssistant.prototype.calendarCreated = function( response ) {
 };
 
 FirstAssistant.prototype.syncNow = function( event ) {
+    var cookie = new Mojo.Model.Cookie( 'settings' );
+    var settings = cookie.get();
     var uri = this.widgets.pim_file.model.value;
+    var username = this.widgets.username.model.value;
+    var password = this.widgets.password.model.value;
 
-    var cookie = new Mojo.Model.Cookie( 'pim_file' );
-    cookie.put( uri );
+    settings.pim_file = uri;
+    settings.username = username;
+    settings.password = password;
+    cookie.put( settings );
 
     var req = new Ajax.Request( uri, {
         method: 'get',
+        requestHeaders: {
+            'Authorization': 'Basic ' + Base64.encode( username + ':' + password )
+        },
         onSuccess: this.refreshPim.bind( this ),
         onFailure: function() {
             Mojo.Controller.errorDialog( $L( 'Server communication error. Please check your settings and server setup!' ) );
@@ -178,8 +205,7 @@ FirstAssistant.prototype.syncNow = function( event ) {
 
 FirstAssistant.prototype.refreshPim = function( response ) {
     var data = response.responseJSON;
-    var cookie = new Mojo.Model.Cookie( 'profile' );
-    var profile = cookie.get();
+    var profile = new Mojo.Model.Cookie( 'settings' ).get().profile;
     var i;
     var t = this;
 
