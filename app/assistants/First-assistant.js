@@ -130,7 +130,7 @@ FirstAssistant.prototype.createProfile = function() {
             displayName: 'PrivateSync',
             username: 'me',
             domain: 'myself',
-            icons: {'48x48': Mojo.appPath + 'icon.png', '32x32': Mojo.appPath + 'icon.png'},
+            icons: {'48x48': Mojo.appPath + 'images/icon48.png', '32x32': Mojo.appPath + 'images/icon32.png'},
             dataTypes: ['CONTACTS', 'CALENDAR'],
             isDataReadOnly: false
         },

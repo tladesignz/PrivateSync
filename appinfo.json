@@ -1,9 +1,10 @@
 {
     "id": "com.tladesignz.privatesync",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "vendor": "tla.designz",
+    "vendorurl": "http://privatesync.tladesignz.com/",
     "type": "web",
     "main": "index.html",
     "title": "PrivateSync",
-    "icon": "icon.png"
+    "icon": "images/icon48.png"
 }

@@ -1,3 +1,10 @@
+div.palm-page-header-wrapper div.icon {
+    background-image: url(../images/icon32.png);
+}
+
 p {
+    padding: 0;
+
+    font-size: 60%;
     text-align: center;
 }
