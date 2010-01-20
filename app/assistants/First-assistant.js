@@ -35,6 +35,7 @@ FirstAssistant.prototype.setup = function() {
                 hintText: null,
                 multiline: false,
                 enterSubmits: false,
+                textReplacement: false,
                 focus: true
             },
             model: {
@@ -47,6 +48,7 @@ FirstAssistant.prototype.setup = function() {
                 hintText: null,
                 multiline: false,
                 enterSubmits: false,
+                textReplacement: false,
                 focus: false
             },
             model: {
@@ -59,6 +61,7 @@ FirstAssistant.prototype.setup = function() {
                 hintText: null,
                 multiline: false,
                 enterSubmits: false,
+                textReplacement: false,
                 focus: false
             },
             model: {
